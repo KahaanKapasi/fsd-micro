@@ -1,0 +1,10 @@
+{
+  "name": "chatspace",
+  "private": true,
+  "scripts": {
+    "install:all": "npm --prefix server install && npm --prefix client install",
+    "server": "npm --prefix server start",
+    "client": "npm --prefix client run dev",
+    "test": "npm --prefix server test"
+  }
+}
