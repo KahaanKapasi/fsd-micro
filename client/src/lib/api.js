@@ -20,7 +20,7 @@ export const setToken = (t) => {
 };
 
 async function request(method, path, body) {
-  const headers = {};
+  const headers = { 'ngrok-skip-browser-warning': '1' }; // skips ngrok's free-tier interstitial page
   const token = getToken();
   if (token) headers.Authorization = `Bearer ${token}`;
   const opts = { method, headers, credentials: 'include' };

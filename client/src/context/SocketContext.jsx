@@ -14,7 +14,7 @@ export function SocketProvider({ children }) {
 
   useEffect(() => {
     if (!user) return undefined;
-    const s = io(BACKEND_URL || undefined, { auth: { token }, withCredentials: true });
+    const s = io(BACKEND_URL || undefined, { auth: { token }, withCredentials: true, extraHeaders: { 'ngrok-skip-browser-warning': '1' } });
     s.on('connect', () => setConnected(true));
     s.on('disconnect', () => setConnected(false));
     setSocket(s);
