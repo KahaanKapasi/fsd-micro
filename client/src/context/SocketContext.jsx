@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
+import { BACKEND_URL } from '../lib/api.js';
 import { useAuth } from './AuthContext.jsx';
 
 const SocketContext = createContext({ socket: null, connected: false });
@@ -13,7 +14,7 @@ export function SocketProvider({ children }) {
 
   useEffect(() => {
     if (!user) return undefined;
-    const s = io({ auth: { token }, withCredentials: true });
+    const s = io(BACKEND_URL || undefined, { auth: { token }, withCredentials: true });
     s.on('connect', () => setConnected(true));
     s.on('disconnect', () => setConnected(false));
     setSocket(s);

@@ -1,0 +1,11 @@
+[build]
+  base    = "client"
+  command = "npm run build"
+  publish = "dist"
+
+# SPA fallback. Set VITE_BACKEND_URL (Netlify env var) to the hosted backend's URL,
+# and CLIENT_ORIGIN on the backend to this site's URL.
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200

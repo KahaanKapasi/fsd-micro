@@ -1,11 +1,13 @@
 import { memo, useState } from 'react';
 import { Check, CheckCheck, Copy, File as FileIcon, ListTodo } from 'lucide-react';
+import { assetUrl } from '../../lib/api.js';
 import { fmtSize, timeLabel } from '../../lib/utils.js';
 import TranslateMenu from '../ai/TranslateMenu.jsx';
 import TaskCard from '../tasks/TaskCard.jsx';
 import Avatar from './Avatar.jsx';
 
-function Attachment({ a }) {
+function Attachment({ a: att }) {
+  const a = { ...att, url: assetUrl(att.url) };
   if (a.fileType.startsWith('image/')) {
     return (
       <a href={a.url} target="_blank" rel="noreferrer">

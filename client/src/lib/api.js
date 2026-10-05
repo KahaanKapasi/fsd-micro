@@ -1,5 +1,9 @@
 const TOKEN_KEY = 'chatspace_token';
 
+// Empty in dev (Vite proxies to :4000). Set VITE_BACKEND_URL when the API is hosted on another origin.
+export const BACKEND_URL = (import.meta.env.VITE_BACKEND_URL || '').replace(/\/$/, '');
+export const assetUrl = (u) => (u?.startsWith('/') ? `${BACKEND_URL}${u}` : u);
+
 export const getToken = () => {
   try {
     return localStorage.getItem(TOKEN_KEY);
@@ -25,7 +29,7 @@ async function request(method, path, body) {
     headers['Content-Type'] = 'application/json';
     opts.body = JSON.stringify(body);
   }
-  const res = await fetch(`/api/v1${path}`, opts);
+  const res = await fetch(`${BACKEND_URL}/api/v1${path}`, opts);
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
   return data;
