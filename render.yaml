@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: chatspace-api
+    runtime: node
+    rootDir: server
+    plan: free
+    buildCommand: npm install
+    startCommand: node index.js
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: CLIENT_ORIGIN
+        value: https://fsdmicro.netlify.app
+      - key: JWT_SECRET
+        generateValue: true
+      - key: MONGO_URI
+        sync: false # paste your MongoDB Atlas connection string in the Render dashboard
